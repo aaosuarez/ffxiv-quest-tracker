@@ -92,11 +92,28 @@ const limsaStartingQuests = [
   "149909ec33f",
   "ece3c51117f",
   "3b19b24585a",
+  "8b2de303b68",
+  "46ef6503fa3",
+  "4bcf49903e6",
+  "0e610d088ae",
+  "e17339990fd",
+  "77bb953f09c",
+  "f07f0e1bb29",
+  "4e7e511b7c8",
+  "d828e62b911",
+  "946b27915fe",
+  "430ed3322dc",
+  "d84c0be46fa",
+  "a7b39223e12",
+  "f783f7c834e",
+  "6c3cef21cf7",
 ];
+const myLittleChocoboQuests = ["2aac1dcda64"];
 const uldahStartingQuests = ["0cf6365e0a9"];
 const ignoredQuestIds = new Set([
   ...limsaStartingQuests,
   ...uldahStartingQuests,
+  ...myLittleChocoboQuests,
 ]);
 const quests = _quests.filter((quest) => !ignoredQuestIds.has(quest.id));
 const completedQuests = _completedQuests.filter(
