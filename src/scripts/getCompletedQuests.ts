@@ -252,8 +252,12 @@ async function getAllCharacterQuests() {
   for (const genre of SIDE_QUESTS_URL_STRUCTURE) {
     for (const area of genre.areas) {
       console.log(`Getting completed quests for ${area.name}...`);
-      const quests = await getCharacterQuest(genre.id, area.id);
-      allQuests.push(...quests);
+      try {
+        const quests = await getCharacterQuest(genre.id, area.id);
+        allQuests.push(...quests);
+      } catch (e) {
+        console.error(`Error getting quests for ${area.name}: ${e}`);
+      }
     }
   }
   console.log(`${allQuests.length} quests completed. Saving...`);
