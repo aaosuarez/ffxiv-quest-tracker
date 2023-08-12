@@ -44,20 +44,26 @@ async function parseQuestPage(url: string) {
   return quests;
 }
 
-async function parseAllQuests(short = false) {
-  const NUM_PAGES = 35;
+const NUM_PAGES = 35;
+async function parseAllQuests(numPagesToParse = NUM_PAGES) {
   const allQuests: Quest[] = [];
 
-  for (const page of range(short ? 1 : NUM_PAGES)) {
+  for (const page of range(numPagesToParse)) {
     const url = getSideQuestUrl(page + 1);
-    console.log(`Extract Page ${page + 1} out of ${NUM_PAGES}`);
-    const quests = await parseQuestPage(url);
-    allQuests.push(...quests);
+    console.log(
+      `Extract Page ${page + 1} out of ${numPagesToParse} from ${url}`
+    );
+    try {
+      const quests = await parseQuestPage(url);
+      allQuests.push(...quests);
+    } catch (e) {
+      console.error(`Error parsing page ${page + 1}: ${e}`);
+    }
   }
   console.log(`Extracted ${allQuests.length} quests. Saving to CSV...`);
   await saveAsJSON(allQuests, "quests");
 }
 
 (async () => {
-  await parseAllQuests(true);
+  await parseAllQuests();
 })();
