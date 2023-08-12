@@ -27,18 +27,25 @@ export default function AreaPage({ params }: { params: { areaId: string } }) {
         {quests.map((quest) => {
           const isCompleted = completedQuestIds.has(quest.id);
           return (
-            <li
-              key={quest.id}
-              className={classNames(
-                "flex flex-row gap-1 items-center hover:bg-white hover:bg-opacity-10 cursor-pointerg",
-                {
-                  "line-through": isCompleted,
+            <li key={quest.id}>
+              <a
+                href={getQuestUrl(quest.id)}
+                className={
+                  "flex flex-row gap-2 items-center hover:bg-white hover:bg-opacity-10 cursor-pointer"
                 }
-              )}
-            >
-              {isCompleted ? <CheckCircledIcon /> : <CircleIcon />}L
-              {quest.level}
-              <a href={getQuestUrl(quest.id)}>{quest.name}</a>
+              >
+                <span>
+                  {isCompleted ? <CheckCircledIcon /> : <CircleIcon />}
+                </span>
+                <span>L{quest.level}</span>
+                <span
+                  className={classNames({
+                    "line-through": isCompleted,
+                  })}
+                >
+                  {quest.name}
+                </span>
+              </a>
             </li>
           );
         })}
