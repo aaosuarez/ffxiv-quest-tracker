@@ -60,6 +60,7 @@ async function parseAllQuests(numPagesToParse = NUM_PAGES) {
       console.error(`Error parsing page ${page + 1}: ${e}`);
     }
   }
+
   console.log(`Extracted ${allQuests.length} quests. Saving to CSV...`);
   await saveAsJSON(allQuests, "quests");
 }
